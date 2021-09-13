@@ -5,6 +5,12 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+
 import NasaImage from './components/nasa_image/NasaImage';
 
 const useStyles = makeStyles((theme) => {
@@ -13,6 +19,10 @@ const useStyles = makeStyles((theme) => {
       root: {
         flexGrow: 1,
       },
+
+      navBar: {
+        background: "#222629",
+      }
     }
   );
 });
@@ -60,6 +70,33 @@ function App() {
 
   return (
     <div className={classes.root}>
+      <Grid
+        container
+        spacing={4}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <AppBar position="fixed" className={classes.navBar}>
+            <Toolbar variant="dense">
+              <Grid
+                container
+                spacing={0}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item xs={12} s={12} m={6} lg={6} xlg={6}>
+                  <Typography variant="h6" color="inherit">
+                    Spacestagram
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Toolbar>
+          </AppBar>
+          <Toolbar />
+        </Grid>
+      </Grid>
+
       <Grid
         container
         spacing={4}
