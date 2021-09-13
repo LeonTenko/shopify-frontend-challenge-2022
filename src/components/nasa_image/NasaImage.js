@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +20,19 @@ const useStyles = makeStyles({
 });
 
 const NasaImage = ({ title, explanation, url }) => {
+  const [likeButton, setLikeButton] = React.useState(false);
   const classes = useStyles();
+
+  const likeClicked = (event) => {
+    likeButton ? setLikeButton(false) : setLikeButton(true);
+  };
+
+  const setLikeButtonColor = () => {
+    return likeButton ? "primary" : "default";
+  };
+  const setLikeButtonVariant = () => {
+    return likeButton ? "contained" : "outlined";
+  };
 
   return (
     <Card className={classes.root}>
@@ -39,7 +52,12 @@ const NasaImage = ({ title, explanation, url }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" variant="outlined" color="default" endIcon={<Icon>thumb_up</Icon>}>
+        <Button
+          onClick={likeClicked}
+          size="small" variant={setLikeButtonVariant()}
+          color={setLikeButtonColor()}
+          endIcon={<Icon>thumb_up</Icon>}
+        >
           Like
         </Button>
       </CardActions>
