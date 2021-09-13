@@ -144,6 +144,7 @@ function App() {
                       explanation={element.explanation}
                       title={element.title}
                       url={element.url}
+                      date={element.date}
                     />
                   </Collapse>
                 </Grid>
@@ -156,6 +157,7 @@ function App() {
                     explanation={element.explanation}
                     title={element.title}
                     url={element.url}
+                    date={element.date}
                   />
                 </Grid>
               );

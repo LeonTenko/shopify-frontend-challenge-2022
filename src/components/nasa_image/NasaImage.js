@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const NasaImage = ({ title, explanation, url }) => {
+const NasaImage = ({ title, explanation, url, date }) => {
   const [likeButton, setLikeButton] = React.useState(false);
   const classes = useStyles();
 
@@ -45,6 +45,9 @@ const NasaImage = ({ title, explanation, url }) => {
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {title}
+          </Typography>
+          <Typography gutterBottom variant="h6" component="h6">
+            {date}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {explanation}
