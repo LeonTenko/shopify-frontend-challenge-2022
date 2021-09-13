@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const NasaImage = () => {
+const NasaImage = ({ title, explanation, url }) => {
   const classes = useStyles();
 
   return (
@@ -26,17 +26,15 @@ const NasaImage = () => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://apod.nasa.gov/apod/image/2109/LastRingPortrait_Cassini_1080.jpg"
-          title="Nasa Image"
+          image={url}
+          title={title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Test Image
+            {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ulla
+            {explanation}
           </Typography>
         </CardContent>
       </CardActionArea>
