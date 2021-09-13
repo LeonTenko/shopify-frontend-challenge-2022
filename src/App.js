@@ -1,17 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import NasaImage from './components/nasa_image/NasaImage';
 
+// Material Ui
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-
-import NasaImage from './components/nasa_image/NasaImage';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import Collapse from '@material-ui/core/Collapse';
 
 const useStyles = makeStyles((theme) => {
   return (
@@ -31,22 +31,36 @@ function App() {
   const classes = useStyles();
 
   const [nasaImages, setNasaImages] = React.useState([]);
+  const [picOfDay, setPicOfDay] = React.useState([]);
+  const [podCheck, setPodCheck] = React.useState(true);
+  const [displayImages, setDisplayImages] = React.useState([]);
+
+  const url = new URL("https://api.nasa.gov/planetary/apod");
+  const apiKey = "EYNdwCv2ngW0Sf5h9ZUVICjuKhYNGNho47VOoZO6";
+  url.searchParams.append("api_key", apiKey);
+  const fetchParams = {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'default'
+  };
+
+  const getPicOfDay = async () => {
+    if (picOfDay.length === 0) {
+      let response = await fetch(url, fetchParams);
+
+      const responseJSON = await response.json();
+
+      setPicOfDay([responseJSON]);
+    }
+  };
 
   const getNasaImages = async () => {
-
-    // Refactor into a separate file later
-    const url = new URL("https://api.nasa.gov/planetary/apod");
     const urlParams = {
-      api_key: "EYNdwCv2ngW0Sf5h9ZUVICjuKhYNGNho47VOoZO6",
-      count: "2"
+      count: "2",
     };
     Object.keys(urlParams).forEach(key => url.searchParams.append(key, urlParams[key]));
 
-    const response = await fetch(url, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'default'
-    });
+    let response = await fetch(url, fetchParams);
 
     let responseJSON = await response.json();
 
@@ -58,15 +72,18 @@ function App() {
     setNasaImages(responseJSON);
   };
 
-  // Populate with default settings once as the page loads.
   React.useEffect(() => {
+    getPicOfDay();
     getNasaImages();
   }, []);
 
-  // Call every time nasaImages changes.
   React.useEffect(() => {
-    console.log(nasaImages);
-  }, [nasaImages])
+    setDisplayImages([...picOfDay, ...nasaImages]);
+  }, [picOfDay, nasaImages, podCheck]);
+
+  const handlePodCheck = () => {
+    setPodCheck(!podCheck);
+  };
 
   return (
     <div className={classes.root}>
@@ -89,6 +106,18 @@ function App() {
                   <Typography variant="h6" color="inherit">
                     Spacestagram
                   </Typography>
+                  <FormGroup row>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          name="podCheck"
+                          checked={podCheck}
+                          onChange={handlePodCheck}
+                        />
+                      }
+                      label="Picture of the Day"
+                    />
+                  </FormGroup>
                 </Grid>
               </Grid>
             </Toolbar>
@@ -106,21 +135,34 @@ function App() {
       >
 
         {
-          nasaImages.length ? nasaImages.map((element, index) => {
-            return (
-              <Grid key={index} item xs={12} s={12} m={6} lg={6} xlg={6}>
-                <NasaImage
-                  explanation={element.explanation}
-                  title={element.title}
-                  url={element.url}
-                />
-              </Grid>
-            );
+          displayImages.length ? displayImages.map((element, index) => {
+            if (index === 0) {
+              return (
+                <Grid key={index} item xs={12} s={12} m={6} lg={6} xlg={6}>
+                  <Collapse in={podCheck}>
+                    <NasaImage
+                      explanation={element.explanation}
+                      title={element.title}
+                      url={element.url}
+                    />
+                  </Collapse>
+                </Grid>
+
+              );
+            } else {
+              return (
+                <Grid key={index} item xs={12} s={12} m={6} lg={6} xlg={6}>
+                  <NasaImage
+                    explanation={element.explanation}
+                    title={element.title}
+                    url={element.url}
+                  />
+                </Grid>
+              );
+            }
+
           }) : <h1>Loading</h1>
         }
-
-
-
       </Grid>
     </div>
   );
