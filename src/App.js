@@ -12,6 +12,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Collapse from '@material-ui/core/Collapse';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => {
   return (
@@ -22,6 +23,21 @@ const useStyles = makeStyles((theme) => {
 
       navBar: {
         background: "#222629",
+      },
+
+      textField: {
+        '& label': {
+          color: "white",
+        },
+        '& label.Mui-focused': {
+          color: "white",
+        },
+        '& input.MuiInputBase-input': {
+          color: "white"
+        },
+      },
+      noMargin: {
+        margin: "0",
       }
     }
   );
@@ -34,6 +50,11 @@ function App() {
   const [picOfDay, setPicOfDay] = React.useState([]);
   const [podCheck, setPodCheck] = React.useState(true);
   const [displayImages, setDisplayImages] = React.useState([]);
+  const [urlParams, setUrlParams] = React.useState(
+    {
+      count: "1",
+    }
+  );
 
   const url = new URL("https://api.nasa.gov/planetary/apod");
   const apiKey = "EYNdwCv2ngW0Sf5h9ZUVICjuKhYNGNho47VOoZO6";
@@ -55,9 +76,7 @@ function App() {
   };
 
   const getNasaImages = async () => {
-    const urlParams = {
-      count: "2",
-    };
+
     Object.keys(urlParams).forEach(key => url.searchParams.append(key, urlParams[key]));
 
     let response = await fetch(url, fetchParams);
@@ -75,7 +94,7 @@ function App() {
   React.useEffect(() => {
     getPicOfDay();
     getNasaImages();
-  }, []);
+  }, [urlParams]);
 
   React.useEffect(() => {
     setDisplayImages([...picOfDay, ...nasaImages]);
@@ -85,53 +104,52 @@ function App() {
     setPodCheck(!podCheck);
   };
 
+  const handleRnadomImageNum = (event) => {
+    setUrlParams({
+      count: event.target.value,
+    });
+  }
+
   return (
     <div className={classes.root}>
-      <Grid
-        container
-        spacing={4}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid item>
-          <AppBar position="fixed" className={classes.navBar}>
-            <Toolbar variant="dense">
-              <Grid
-                container
-                spacing={0}
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid item xs={12} s={12} m={6} lg={6} xlg={6}>
-                  <Typography variant="h6" color="inherit">
-                    Spacestagram
-                  </Typography>
-                  <FormGroup row>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          name="podCheck"
-                          checked={podCheck}
-                          onChange={handlePodCheck}
-                        />
-                      }
-                      label="Picture of the Day"
-                    />
-                  </FormGroup>
-                </Grid>
-              </Grid>
-            </Toolbar>
-          </AppBar>
-          <Toolbar />
-        </Grid>
-      </Grid>
+      <AppBar position="fixed" className={classes.navBar}>
+        <Toolbar variant="dense">
+          <Typography className={classes.root} variant="h6" color="inherit">
+            Spacestagram
+          </Typography>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Switch
+                  name="podCheck"
+                  checked={podCheck}
+                  onChange={handlePodCheck}
+                />
+              }
+              label="Picture of the Day"
+            />
+            <TextField
+              className={classes.textField}
+              color="secondary"
+              id="standard-basic"
+              label="Random Images"
+              variant="filled"
+              type="number"
+              size="small"
+              defaultValue={urlParams.count}
+              onChange={handleRnadomImageNum}
+            />
+          </FormGroup>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
 
       <Grid
         container
-        spacing={4}
         direction="column"
         justifyContent="center"
         alignItems="center"
+        spacing={4}
       >
 
         {
@@ -148,9 +166,9 @@ function App() {
                     />
                   </Collapse>
                 </Grid>
-
               );
-            } else {
+            }
+            else {
               return (
                 <Grid key={index} item xs={12} s={12} m={6} lg={6} xlg={6}>
                   <NasaImage
