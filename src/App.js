@@ -163,6 +163,7 @@ function App() {
                       title={element.title}
                       url={element.url}
                       date={element.date}
+                      hdurl={element.hdurl}
                     />
                   </Collapse>
                 </Grid>
@@ -176,6 +177,7 @@ function App() {
                     title={element.title}
                     url={element.url}
                     date={element.date}
+                    hdurl={element.hdurl}
                   />
                 </Grid>
               );
