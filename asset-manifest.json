@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.a617e044.chunk.css",
-    "main.js": "/static/js/main.deb7adc4.chunk.js",
-    "main.js.map": "/static/js/main.deb7adc4.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.669adb4e.js",
-    "runtime-main.js.map": "/static/js/runtime-main.669adb4e.js.map",
-    "static/js/2.0e6d7c32.chunk.js": "/static/js/2.0e6d7c32.chunk.js",
-    "static/js/2.0e6d7c32.chunk.js.map": "/static/js/2.0e6d7c32.chunk.js.map",
-    "static/js/3.c626f70c.chunk.js": "/static/js/3.c626f70c.chunk.js",
-    "static/js/3.c626f70c.chunk.js.map": "/static/js/3.c626f70c.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.a617e044.chunk.css.map": "/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.0e6d7c32.chunk.js.LICENSE.txt": "/static/js/2.0e6d7c32.chunk.js.LICENSE.txt"
+    "main.css": "/shopify-frontend-challenge-2022/static/css/main.a617e044.chunk.css",
+    "main.js": "/shopify-frontend-challenge-2022/static/js/main.deb7adc4.chunk.js",
+    "main.js.map": "/shopify-frontend-challenge-2022/static/js/main.deb7adc4.chunk.js.map",
+    "runtime-main.js": "/shopify-frontend-challenge-2022/static/js/runtime-main.6cfea81c.js",
+    "runtime-main.js.map": "/shopify-frontend-challenge-2022/static/js/runtime-main.6cfea81c.js.map",
+    "static/js/2.0e6d7c32.chunk.js": "/shopify-frontend-challenge-2022/static/js/2.0e6d7c32.chunk.js",
+    "static/js/2.0e6d7c32.chunk.js.map": "/shopify-frontend-challenge-2022/static/js/2.0e6d7c32.chunk.js.map",
+    "static/js/3.c626f70c.chunk.js": "/shopify-frontend-challenge-2022/static/js/3.c626f70c.chunk.js",
+    "static/js/3.c626f70c.chunk.js.map": "/shopify-frontend-challenge-2022/static/js/3.c626f70c.chunk.js.map",
+    "index.html": "/shopify-frontend-challenge-2022/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/shopify-frontend-challenge-2022/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.0e6d7c32.chunk.js.LICENSE.txt": "/shopify-frontend-challenge-2022/static/js/2.0e6d7c32.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.669adb4e.js",
+    "static/js/runtime-main.6cfea81c.js",
     "static/js/2.0e6d7c32.chunk.js",
     "static/css/main.a617e044.chunk.css",
     "static/js/main.deb7adc4.chunk.js"
