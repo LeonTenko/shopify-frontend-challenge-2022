@@ -56,7 +56,7 @@ function App() {
   const [displayImages, setDisplayImages] = React.useState([]);
   const [urlParams, setUrlParams] = React.useState(
     {
-      count: "1",
+      count: cookies.get("count") ? parseInt(cookies.get("count")) : 10,
     }
   );
 
@@ -98,6 +98,7 @@ function App() {
   React.useEffect(() => {
     getPicOfDay();
     getNasaImages();
+    cookies.set("count", urlParams.count);
   }, [urlParams]);
 
   React.useEffect(() => {
@@ -109,6 +110,7 @@ function App() {
   };
 
   const handleRnadomImageNum = (event) => {
+    event.target.value = !parseInt(event.target.value) || parseInt(event.target.value) <= 0 || parseInt(event.target.value) > 100 ? "1" : event.target.value;
     setUrlParams({
       count: event.target.value,
     });
@@ -142,6 +144,7 @@ function App() {
               size="small"
               defaultValue={urlParams.count}
               onChange={handleRnadomImageNum}
+              inputProps={{min: "1"}}
             />
           </FormGroup>
         </Toolbar>
