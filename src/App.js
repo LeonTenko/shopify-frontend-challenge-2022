@@ -14,6 +14,9 @@ import Switch from '@material-ui/core/Switch';
 import Collapse from '@material-ui/core/Collapse';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const useStyles = makeStyles((theme) => {
   return (

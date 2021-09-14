@@ -11,6 +11,9 @@ import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -28,8 +31,15 @@ const useStyles = makeStyles({
 });
 
 const NasaImage = ({ title, explanation, url, date, hdurl }) => {
-  const [likeButton, setLikeButton] = React.useState(false);
+  const [likeButton, setLikeButton] = React.useState(
+    cookies.get(url) === 'false' || !cookies.get(url) ? false : true
+  );
   const [share, setShare] = React.useState(false);
+
+  // Set up cookies
+  React.useEffect(() => {
+    cookies.set(url, likeButton);
+  }, [likeButton]);
 
   const classes = useStyles();
 
