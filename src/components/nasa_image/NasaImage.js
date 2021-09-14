@@ -26,7 +26,6 @@ const useStyles = makeStyles({
   media: {
     height: "0",
     paddingTop: '56.25%',
-    objectFit: 'cover',
   },
 });
 
@@ -65,10 +64,15 @@ const NasaImage = ({ title, explanation, url, date, hdurl }) => {
     }
 
     setShare(false);
-  }
+  };
+
+  const handleNewTab = () => {
+    window.open(hdurl);
+  };
+
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea onClick={handleNewTab}>
         <CardMedia
           className={classes.media}
           image={url}
