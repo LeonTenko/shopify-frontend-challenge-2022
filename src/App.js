@@ -13,6 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Collapse from '@material-ui/core/Collapse';
 import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => {
   return (
@@ -183,7 +184,7 @@ function App() {
               );
             }
 
-          }) : <h1>Loading</h1>
+          }) : <CircularProgress color="secondary"></CircularProgress>
         }
       </Grid>
     </div>
